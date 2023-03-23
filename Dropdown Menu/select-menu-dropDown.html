@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <title>Dropdown Menu Select List</title>
+    <style>
+        body {
+            background-color: #C8EEEC;
+            font-family: 'Segoe UI', sans-serif;
+            box-sizing: border-box;        
+        }
+
+        li {
+            list-style-type: none ;
+        }
+
+        #container {
+            width: 100%;
+            max-width: 320px;
+            position: relative;
+            margin: 80px auto;
+        }
+
+        #icon {
+            color: #397BF7;
+            font-size: 22px;
+            display: flex;
+            transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        .box {
+            position: relative;
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .button {
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .button.open ~ .list-items {
+            display: block;
+        }
+
+        .button.open  #icon {
+            transform: rotate(-180deg);
+        } 
+
+        .list-items {
+            display: none;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            height: 40px;
+            transition: .3s;
+            cursor: pointer;
+        }
+
+        .item:hover {
+            background-color: #e7edfe;
+            border-radius: 8px;
+        }
+
+        .check-icon {
+            font-size: 12px;
+            transform: scale(0);
+            transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+
+        .checkbox {
+            border: 1px solid black;
+            display: flex;    
+            border-radius: 4px;
+            height: 16px;
+            width: 16px;
+            justify-content: center;
+            align-items: center;     
+            margin: 12px; 
+            transition: all 0.3s ease-in-out;
+        }
+
+        .item.checked .check-icon {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="button open box">
+            <span id="btn-text">Select Product</span>
+            <span id="icon" ><i class="fa-solid fa-circle-chevron-down"></i></span>
+        </div>
+
+        <ul class="list-items box">
+            <li class="item">
+                <span class="checkbox">
+                    <i class="check-icon fa-solid fa-check check-icon"></i>
+                </span>
+                <span class="item-text">Potatoes</span>
+            </li>
+            <li class="item">
+                <span class="checkbox">
+                    <i class="check-icon fa-solid fa-check check-icon"></i>
+                </span>
+                <span class="item-text">Tomatoes</span>
+            </li>
+            <li class="item">
+                <span class="checkbox">
+                    <i class="check-icon fa-solid fa-check check-icon"></i>
+                </span>
+                <span class="item-text">Aubergine</span>
+            </li>
+            <li class="item">
+                <span class="checkbox">
+                    <i class="check-icon fa-solid fa-check check-icon"></i>
+                </span>
+                <span class="item-text">Lettuce</span>
+            </li>
+            <li class="item">
+                <span class="checkbox">
+                    <i class="check-icon fa-solid fa-check check-icon"></i>
+                </span>
+                <span class="item-text">Cucumber</span>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const selectBtn = document.querySelector(".button");
+        const items = document.querySelectorAll(".item");
+
+        selectBtn.addEventListener("click",() => {
+            selectBtn.classList.toggle("open");
+        })
+
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+                item.classList.toggle("checked")
+
+                let checked = document.querySelectorAll(".checked");
+                let btntext = document.querySelector("#btn-text");
+
+                if (checked.length > 0){
+                    btntext.innerText = `${checked.length} product selected`; 
+                }else {
+                    btntext.innerText = `Select Product`;
+                }
+            } )
+        })
+
+        
+    </script>
+</body>
+</html>
